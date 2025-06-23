@@ -15,14 +15,14 @@ def check(handles:, resources:, maximum_score:)
     if ins.name == "vpc-1" && ins.auto_create_subnetworks == false
       instance_1 = true
       # simple check: is there a first subnet at all?
-      if ins.subnetworks.first.split("/").last && ins.subnetworks.last.split("/").last
+      if ins.subnetworks.first.split("/").last == "vpc-1-subnet-1" && ins.subnetworks.last.split("/").last == "vpc-1-subnet-2"
         subnet1 = true
       end
     end
 
     if ins.name == "vpc-2" && ins.auto_create_subnetworks == true
       instance_2 = true
-      if ins.subnetworks.first.split("/").last
+      if ins.subnetworks.first.split("/").last == "vpc-2"
         subnet2 = true
       end
     end
