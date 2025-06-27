@@ -19,9 +19,11 @@ dataset.each do |ds|
 end
 
 if set_bigquery && set_bigquerytable
-  ret_hash = {:score => maximum_score, :message => "Found bigQueryTest dataset with user_info table in project #{project_id}", :student_message => "Success! You have created a BigQuery dataset and table."}
-else
-  ret_hash = {:score => 0, :message => "Did not find bigQueryTest dataset with user_info table in project #{project_id}", :student_message => "You need to create a BigQuery dataset and table."}
-end
+    ret_hash = {:score => maximum_score, :message => "Found bigQueryTest dataset with user_info table in project #{project_id}", :student_message => "Success! You have created a BigQuery dataset and table."}
+  elsif set_bigquery && !set_bigquerytable
+    ret_hash = {:score => 0, :message => "Found bigQueryTest dataset but did not find user_info table in project #{project_id}", :student_message => "You need to create a user_info table in the bigQueryTest dataset."}
+  else
+    ret_hash = {:score => 0, :message => "Did not find bigQueryTest dataset with user_info table in project #{project_id}", :student_message => "You need to create a BigQuery dataset and table."}
+  end
 return ret_hash
 end
